@@ -1,6 +1,8 @@
-const { defineConfig } = require('@vue/cli-service')
+const {
+  defineConfig
+} = require('@vue/cli-service')
 module.exports = defineConfig({
-  transpileDependencies: true,  
+  transpileDependencies: true,
   // 修改 src 目录 为 examples 目录
   pages: {
     index: {
@@ -11,16 +13,20 @@ module.exports = defineConfig({
   },
   // 扩展 webpack 配置，使 packages 加入编译
   chainWebpack: config => {
-    config.module
+    config.module.rule("nes")
+      .test(/\.nes$/)
+      .use("binary-loader")
+      .loader("binary-loader")
+      .end()
       .rule('js')
       .include
-        .add('/nes-emulator-vue')
-        .end()
+      .add('/nes-emulator-vue')
+      .end()
       .use('babel')
-        .loader('babel-loader')
-        .tap(options => {
-          // 修改它的选项...
-          return options
-        })
+      .loader('babel-loader')
+      .tap(options => {
+        // 修改它的选项...
+        return options
+      })
   }
 })

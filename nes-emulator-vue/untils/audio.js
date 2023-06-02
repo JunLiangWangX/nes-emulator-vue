@@ -36,10 +36,11 @@ export const audioFrame = (nes) => {
     const len = dst.length
     if (audio_remain() < AUDIO_BUFFERING) {
       try {
-        ignoreSourceError(nes.frame)
+        nes.frame()
       }
       catch (e) {
-        return
+        console.info(e)
+        return 
       }
     }
     const dst_l = dst.getChannelData(0)

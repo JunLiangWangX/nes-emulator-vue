@@ -1,6 +1,6 @@
 <template>
   <main>
-    <NesEmulatorVue />
+    <NesEmulatorVue  ref="test"/>
   </main>
 </template>
 
@@ -12,6 +12,9 @@ export default {
   name: 'App',
   components: {
     NesEmulatorVue
+  },
+  mounted(){
+    console.info(this.$refs.test)
   }
 }
 </script>
